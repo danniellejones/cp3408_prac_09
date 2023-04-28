@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Spawn : MonoBehaviour
@@ -15,7 +13,7 @@ public class Spawn : MonoBehaviour
         {
             Instantiate(patientPrefab, this.transform.position, Quaternion.identity);
         }
-        Invoke("SpawnPatient", 5);
+        Invoke("SpawnPatient", 2);
     }
 
     void SpawnPatient()

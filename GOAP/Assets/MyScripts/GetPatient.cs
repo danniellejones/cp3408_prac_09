@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class GetPatient : GAction
@@ -8,7 +6,8 @@ public class GetPatient : GAction
     public override bool PrePerform()
     {
         target = GWorld.Instance.RemovePatient();
-        if(target == null) return false;
+        if(target == null) 
+            return false;
 
         resource = GWorld.Instance.RemoveCubicle();
         if(resource != null)
@@ -29,8 +28,10 @@ public class GetPatient : GAction
     public override bool PostPerform()
     {
         GWorld.Instance.GetWorld().ModifyState("Waiting", -1);
-        if(target)
+        if (target)
+        {
             target.GetComponent<GAgent>().inventory.AddItem(resource);  // Gives same cubicle to their inventory
+        }
         return true;
     }
 }

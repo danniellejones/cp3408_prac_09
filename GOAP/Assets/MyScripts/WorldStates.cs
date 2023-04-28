@@ -1,6 +1,4 @@
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
 [System.Serializable]
 public class WorldState
@@ -35,28 +33,23 @@ public class WorldStates
 
         if (HasState(key))
         {
-
             states[key] += value;
             if (states[key] <= 0) RemoveState(key);
         }
         else
         {
-
             AddState(key, value);
         }
     }
 
-    void SetState(string key, int value)
+    public void SetState(string key, int value)
     {
-
         if (HasState(key))
         {
-
             states[key] = value;
         }
         else
         {
-
             AddState(key, value);
         }
     }

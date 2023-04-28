@@ -1,5 +1,3 @@
-using JetBrains.Annotations;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -19,7 +17,9 @@ public sealed class GWorld
 
         GameObject[] cubes = GameObject.FindGameObjectsWithTag("Cubicle");
         foreach (GameObject c in cubes)
+        {
             cubicles.Enqueue(c);
+        }
 
         if (cubes.Length > 0)
         {

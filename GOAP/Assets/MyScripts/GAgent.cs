@@ -1,8 +1,6 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
-using Unity.VisualScripting;
 
 public class SubGoal
 {
@@ -30,17 +28,17 @@ public class GAgent : MonoBehaviour
     SubGoal currentGoal;
 
     // Start is called before the first frame update
-    protected virtual void Start()
+    protected virtual void Start()  // This is public void Start() in tutorial, video instructs to change
     {
         GAction[] acts = this.GetComponents<GAction>();
-        foreach(GAction a in acts)
+        foreach (GAction a in acts)
         {
             actions.Add(a);
         }
     }
 
     bool invoked = false;
-    void CompleteAction()
+    public void CompleteAction()
     {
         currentAction.running = false;
         currentAction.PostPerform();
@@ -71,7 +69,8 @@ public class GAgent : MonoBehaviour
             // Sort through goals, interger = priority
             var sortedGoals = from entry in goals orderby entry.Value descending select entry;
 
-            foreach (KeyValuePair<SubGoal, int> sg in sortedGoals) {
+            foreach (KeyValuePair<SubGoal, int> sg in sortedGoals)
+            {
                 actionQueue = planner.plan(actions, sg.Key.sGoals, beliefs);
                 if (actionQueue != null)
                 {
@@ -93,17 +92,18 @@ public class GAgent : MonoBehaviour
         if (actionQueue != null && actionQueue.Count > 0)
         {
             currentAction = actionQueue.Dequeue();  // Take action at top of queue off and put into current action
+
             if (currentAction.PrePerform())
             {
                 if (currentAction.target == null && currentAction.targetTag != "")
                 {
                     currentAction.target = GameObject.FindWithTag(currentAction.targetTag);
+                }
 
-                    if (currentAction.target != null)
-                    {
-                        currentAction.running = true;
-                        currentAction.agent.SetDestination(currentAction.target.transform.position);
-                    }
+                if (currentAction.target != null)
+                {
+                    currentAction.running = true;
+                    currentAction.agent.SetDestination(currentAction.target.transform.position);
                 }
             }
             else

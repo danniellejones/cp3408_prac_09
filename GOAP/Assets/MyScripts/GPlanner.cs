@@ -1,7 +1,5 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System.Linq;
 
 public class Node
 {
@@ -24,9 +22,9 @@ public class Node
         this.parent = parent;
         this.cost = cost;
         this.state = new Dictionary<string, int>(allStates);  // Copy
-        foreach(KeyValuePair<string, int> b in beliefStates)
+        foreach (KeyValuePair<string, int> b in beliefStates)
         {
-            if(!this.state.ContainsKey(b.Key))
+            if (!this.state.ContainsKey(b.Key))
                 this.state.Add(b.Key, b.Value);
         }
         this.action = action;
@@ -64,12 +62,9 @@ public class GPlanner
             {
                 cheapest = leaf;
             }
-            else
+            else if (leaf.cost < cheapest.cost)
             {
-                if (leaf.cost < cheapest.cost)
-                {
-                    cheapest = leaf;
-                }
+                cheapest = leaf;
             }
         }
 
@@ -136,12 +131,12 @@ public class GPlanner
 
     private bool GoalAchieved(Dictionary<string, int> goal, Dictionary<string, int> state)
     {
-        foreach (KeyValuePair<string, int> g in goal) {
+        foreach (KeyValuePair<string, int> g in goal)
+        {
             if (!state.ContainsKey(g.Key))
             {
                 return false;
             }
-            
         }
         return true;
     }
