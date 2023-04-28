@@ -21,14 +21,15 @@ public class GAgent : MonoBehaviour
 {
     public List<GAction> actions = new List<GAction>();
     public Dictionary<SubGoal, int> goals = new Dictionary<SubGoal, int>();
-    
+    public WorldStates beliefs = new WorldStates();
+
     GPlanner planner;
     Queue<GAction> actionQueue;
     public GAction currentAction;
     SubGoal currentGoal;
 
     // Start is called before the first frame update
-    void Start()
+    protected virtual void Start()
     {
         GAction[] acts = this.GetComponents<GAction>();
         foreach(GAction a in acts)
@@ -50,7 +51,8 @@ public class GAgent : MonoBehaviour
         // If in the middle of action, get out of lateupdate
         if (currentAction != null && currentAction.running)
         {
-            if (currentAction.agent.hasPath && currentAction.agent.remainingDistance < 1f)
+            float distanceToTarget = Vector3.Distance(currentAction.target.transform.position, this.transform.position);
+            if (currentAction.agent.hasPath && distanceToTarget < 2f)
             {
                 if (!invoked)
                 {

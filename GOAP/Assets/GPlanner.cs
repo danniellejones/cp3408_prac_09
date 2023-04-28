@@ -20,7 +20,7 @@ public class Node
     }
 }
 
-public class GPlanner : MonoBehaviour
+public class GPlanner
 {
     public Queue<GAction> plan(List<GAction> actions, Dictionary<string, int> goal, WorldStates states)
     {
@@ -40,7 +40,7 @@ public class GPlanner : MonoBehaviour
 
         if (!success)
         {
-            Debug.Log("No Plan");
+            Debug.Log("NO PLAN");
             return null;
         }
 
@@ -64,7 +64,7 @@ public class GPlanner : MonoBehaviour
         Node n = cheapest;
         while (n != null)
         {
-            if (n.action == null)
+            if (n.action != null)
             {
                 result.Insert(0, n.action);
             }
