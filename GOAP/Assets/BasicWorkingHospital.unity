@@ -418,7 +418,7 @@ MonoBehaviour:
   actionName: GetPatient
   cost: 1
   target: {fileID: 0}
-  targetTag: WaitingArea
+  targetTag: 
   duration: 0
   preConditions:
   - key: Waiting
@@ -2189,6 +2189,10 @@ PrefabInstance:
     - target: {fileID: 7881807149238628900, guid: d36c43225f9391e4c8810c98eb7ef85e, type: 3}
       propertyPath: m_Name
       value: Patient
+      objectReference: {fileID: 0}
+    - target: {fileID: 7881807149238628900, guid: d36c43225f9391e4c8810c98eb7ef85e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d36c43225f9391e4c8810c98eb7ef85e, type: 3}
