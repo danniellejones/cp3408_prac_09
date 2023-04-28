@@ -18,49 +18,46 @@ public class WorldStates
         states = new Dictionary<string, int>();
     }
 
-    public bool HasState (string key)
-    {
-        return states.ContainsKey(key);
-    }
-
+    public bool HasState (string key) => states.ContainsKey(key);
+   
     void AddState (string key, int value)
     {
         states.Add(key, value);
     }
 
-    public void ModifyState (string key, int value)
+    public void RemoveState(string key)
     {
-        if (states.ContainsKey(key))
+        if (HasState(key)) states.Remove(key);
+    }
+
+   public void ModifyState(string key, int value)
+    {
+
+        if (HasState(key))
         {
+
             states[key] += value;
-            if (states[key] <= 0)
-            {
-                RemoveState(key);
-            }
+            if (states[key] <= 0) RemoveState(key);
         }
         else
         {
-            states.Add(key, value);
+
+            AddState(key, value);
         }
     }
 
-    public void RemoveState(string key)
+    void SetState(string key, int value)
     {
-        if (states.ContainsKey(key))
-        {
-            states.Remove(key);
-        }
-    }
 
-    public void SetState(string key, int value)
-    {
-        if (states.ContainsKey(key))
+        if (HasState(key))
         {
+
             states[key] = value;
         }
         else
         {
-            states.Add(key, value);
+
+            AddState(key, value);
         }
     }
 
